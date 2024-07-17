@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mesa-job
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: nautilus.io/csu-tide
+                operator: Exists
+      containers:
+      - name: mesa-container
+        image: ghcr.io/sdsu-research-ci/mesa-notebook:v1.1
+        command: ["jupyter", "lab", "--ip='0.0.0.0'"]
+        resources:
+          limits:
+            cpu: "8"
+            memory: 16Gi
+          requests:
+            cpu: "8"
+            memory: 16Gi
+        volumeMounts:
+        - mountPath: /home/jovyan/shared/
+          name: shared
+        - mountPath: /dev/shm
+          name: dshm
+      volumes:
+      - name: shared
+        persistentVolumeClaim:
+          claimName: shared
+      - name: dshm
+        emptyDir:
+          medium: Memory
+      tolerations:
+      - key: nautilus.io/csu-tide
+        operator: Exists
+        effect: NoSchedule
+      - key: nautilus.io/sdsu-fix
+        operator: Exists
+        effect: NoSchedule
