@@ -6,6 +6,7 @@ This readme assumes that you have:
 - Completed the [getting access](https://sdsu-research-ci.github.io/softwarefactory/gettingaccess) guide
 - Installed [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) on your local machine
 - Downloaded your [NRP Portal config](https://portal.nrp-nautilus.io/authConfig) and copied it to ~/.kube/config
+- Cloned this repository and run the commands from the rosen-astro-group/mesa directory
 
 ## Config
 
@@ -18,6 +19,12 @@ kubectl config set-context nautilus --namespace=sdsu-rosen-astro-group
 ```
 
 ## Interactive Job
+
+Schedule the interactive job
+
+```
+kubectl apply -f mesa-interactive-job.yaml
+```
 
 Get the pod and ensure it's running:
 
