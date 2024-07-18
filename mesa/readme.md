@@ -23,7 +23,7 @@ kubectl config set-context nautilus --namespace=sdsu-rosen-astro-group
 Schedule the interactive job
 
 ```
-kubectl apply -f mesa-interactive-job.yaml
+kubectl apply -f mesa-interactive-job.yaml -n sdsu-rosen-astro-group
 ```
 
 Get the pod and ensure it's running:

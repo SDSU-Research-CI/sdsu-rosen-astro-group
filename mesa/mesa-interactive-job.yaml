@@ -12,6 +12,7 @@ spec:
             - matchExpressions:
               - key: nautilus.io/csu-tide
                 operator: Exists
+      restartPolicy: Never
       containers:
       - name: mesa-container
         image: ghcr.io/sdsu-research-ci/mesa-notebook:v1.1
